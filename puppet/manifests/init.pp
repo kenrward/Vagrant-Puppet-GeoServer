@@ -6,5 +6,10 @@ package { 'vim':
   ensure => present,
 }
 
+package { 'unzip':
+  ensure => present,
+}
+
 include tomcat
+include java
 include geoserver

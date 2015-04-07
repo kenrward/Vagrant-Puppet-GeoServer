@@ -1,5 +1,6 @@
 class tomcat {
   $tomcat_password = 'baddcweather' 
+  $tomcat_port = 8080
   
   package { 'tomcat6':
     ensure => 'present',

@@ -5,3 +5,6 @@ boxes/*
 /website/docs/.vagrant
 /website/www/.vagrant
 /vagrant-spec.config.rb
+
+#Geoserver War
+*.war
