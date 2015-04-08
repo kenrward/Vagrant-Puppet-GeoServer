@@ -19,7 +19,7 @@ Vagrant.configure("2") do  |config|
   config.vm.network "forwarded_port", guest: 8080, host: 8880
   config.vm.network "private_network", ip: "192.168.33.10"
   
-  config.vm.provision "shell", inline: $script
+  #config.vm.provision "shell", inline: $script
   
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = 'puppet/manifests'

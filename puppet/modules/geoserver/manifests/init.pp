@@ -1,22 +1,18 @@
 class geoserver {
+	exec { 'wget-geoserver':
+		command  => '/usr/bin/wget http://downloads.sourceforge.net/project/geoserver/GeoServer/2.7.0/geoserver-2.7.0-war.zip',
+		cwd      => '/var/lib/tomcat6/webapps/',
+		#require  => File[ '/var/lib/tomcat6/webapps/geoserver-2.7.0-war.zip'],
+	}
 
- exec { "wget -q  http://downloads.sourceforge.net/project/geoserver/GeoServer/2.7.0/geoserver-2.7.0-war.zip -O /home/vagrant/geoserver-2.7.0.war.zip":
-    creates => "/home/vagrant/geoserver-2.7.0.war.zip",
-    path    => ["/usr/bin", "/usr/sbin"]
-  }
+	exec { 'unzip-geoserver':
+	  command  => 'sudo /usr/bin/unzip geoserver-2.7.0-war.zip',
+	  cwd      => '/var/lib/tomcat6/webapps/',
+	  creates => "/var/lib/tomcat6/webapps/geoserver-2.7.0.war",
+	  path     => ["/usr/bin", "/usr/sbin"],
+	  require  => Exec[ 'wget-geoserver' ],
+	  notify   => Service['tomcat6'],
+	}
 
-  exec { "sudo unzip /home/vagrant/geoserver-2.7.0.war.zip":
-    cwd => "/home/vagrant/",
-    path    => ["/usr/bin", "/usr/sbin"]
-  }
-  
-  # Add war
-  file { '/var/lib/tomcat6/webapps/geoserver.war':
-    path => '/var/lib/tomcat6/webapps/geoserver.war',
-    ensure => file,
-    require => Package['tomcat6'],
-    source => '/home/vagrant/geoserver.war',
-    notify => Service['tomcat6'],
-  }
 
 }
