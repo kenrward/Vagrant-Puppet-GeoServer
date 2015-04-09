@@ -9,7 +9,7 @@ package { 'unzip':
 
 
 
-#include tomcat
+include tomcat
 #include java
-#include geoserver
+include geoserver
 
