@@ -4,7 +4,7 @@ class tomcat {
   
   package { 'tomcat6':
     ensure => 'present',
-    require => Exec['apt-get update'],
+    #require => Exec['apt-get update'],
   }
   service { 'tomcat6':
     ensure => running,

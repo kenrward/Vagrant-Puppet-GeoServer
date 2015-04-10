@@ -8,3 +8,6 @@ boxes/*
 
 #Geoserver War
 *.war
+
+#ignore puppetlab modules
+/puppet/modules/java
