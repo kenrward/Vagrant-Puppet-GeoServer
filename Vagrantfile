@@ -8,7 +8,7 @@
 
 
 Vagrant.configure("2") do  |config|
-  config.vm.box = "puppetlabs/centos-6.6-64-puppet"
+  config.vm.box = "puppetlabs/centos-6.6-32-puppet"
   config.vm.provision "shell", path: "install-puppet-modules.sh"
   #config.vm.hostname = "geoserver.test.server"
   #config.vm.network "forwarded_port", guest: 80, host: 8000
@@ -21,12 +21,16 @@ Vagrant.configure("2") do  |config|
     gis.vm.network "forwarded_port", guest: 80, host: 8000
     gis.vm.network "forwarded_port", guest: 8080, host: 8880
     gis.vm.network "private_network", ip: "192.168.33.10"  
+	
+	#gis.vm.provider "virtualbox" do |v|
+	#  v.gui = true
+	#end
     
       gis.vm.provision "puppet" do |puppet|
         puppet.manifests_path = 'puppet/manifests'
         puppet.module_path = 'puppet/modules'
         puppet.manifest_file = 'gis.pp'
-        puppet.options = '--debug --verbose'
+        #puppet.options = '--debug --verbose'
       end
   end
 
