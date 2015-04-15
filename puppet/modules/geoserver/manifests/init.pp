@@ -13,7 +13,7 @@ class geoserver {
 	  creates => "/var/lib/tomcat6/webapps/geoserver-2.7.0.war",
 	  path     => ["/usr/bin", "/usr/sbin"],
 	  require  => Exec[ 'wget-geoserver' ],
-	  notify   => Service['tomcat6'],
+	  require  => File[ '/var/lib/tomcat6/webapps/geoserver-2.7.0-war.zip'],
 	}
 
 
