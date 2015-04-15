@@ -11,7 +11,7 @@ class tomcat {
     require => Package['tomcat6'],
   }
   
-  package { 'tomcat6-admin':
+  package { 'tomcat6-admin-webapps':
     require => Package['tomcat6'],
   }
   
