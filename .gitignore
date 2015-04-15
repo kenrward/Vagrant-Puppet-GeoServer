@@ -11,3 +11,4 @@ boxes/*
 
 #ignore puppetlab modules
 /puppet/modules/java
+/puppet/modules/tomcat
