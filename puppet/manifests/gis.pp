@@ -1,14 +1,18 @@
-file { "/etc/yum.conf":
-    mode   => 644,
-    owner  => root,
-    group  => root,
-    source => "puppet:///files/yum.conf"
+class { 'java':}
+class { 'tomcat':}
+
+package { 'tomcat6-webapps':
+  ensure => present,
+  notify   => Service['tomcat6'],
+}
+package { 'tomcat6-admin-webapps':
+  ensure => present,
+  notify   => Service['tomcat6'],
+}
+service { 'iptables':
+  ensure => stopped,
 }
 
-class { 'java':}
-package { 'vim-enhanced.x86_64':
-  ensure => present,
-}
 
 package { 'unzip':
   ensure => present,
