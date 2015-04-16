@@ -9,7 +9,7 @@
 
 Vagrant.configure("2") do  |config|
   config.vm.box = "puppetlabs/centos-6.6-32-puppet"
-  #config.vm.provision "shell", path: "install-puppet-modules.sh"
+  config.vm.provision "shell", path: "install-puppet-modules.sh"
   
   config.vm.define "gis" do |gis|
     gis.vm.network "forwarded_port", guest: 80, host: 8000
