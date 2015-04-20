@@ -7,13 +7,12 @@ class geoserver {
 		#require  => File[ '/var/lib/tomcat6/webapps/geoserver-2.7.0-war.zip'],
 	}
 
-	#exec { 'unzip-geoserver':
-	#  command  => 'sudo /usr/bin/unzip geoserver-2.7.0-war.zip',
-	#  cwd      => '/var/lib/tomcat6/webapps/',
-	#  creates => "/var/lib/tomcat6/webapps/geoserver-2.7.0.war",
-	#  path     => ["/usr/bin", "/usr/sbin"],
-	#  require  => File[ '/var/lib/tomcat6/webapps/geoserver-2.7.0-war.zip'],
-	#}
-
-
+	exec { 'unzip-geoserver':
+	  command  => 'sudo /usr/bin/unzip geoserver-2.7.0-war.zip',
+	  cwd      => '/var/lib/tomcat6/webapps/',
+	  creates => "/var/lib/tomcat6/webapps/geoserver-2.7.0.war",
+	  path     => ["/usr/bin", "/usr/sbin"],
+      require   => Service['tomcat6'],
+	}
 }
+
