@@ -1,5 +1,29 @@
-driver=org.postgresql.Driver
-url=jdbc:postgresql://192.168.1.124:5432/monitoring
-username=geosrv
-password=makemaps
-defaultAutoCommit=false
+<DataStore>
+    <id>datastore</id>
+    <parameters>
+        <Parameter>
+            <name>dbtype</name>
+            <value>postgisng</value>
+        </Parameter>
+        <Parameter>
+            <name>host</name>
+            <value>postgresql.example.org</value>
+        </Parameter>
+        <Parameter>
+            <name>port</name>
+            <value>5432</value>
+        </Parameter>
+        <Parameter>
+            <name>database</name>
+            <value>test</value>
+        </Parameter>
+        <Parameter>
+            <name>user</name>
+            <value>test</value>
+        </Parameter>
+        <Parameter>
+            <name>passwd</name>
+            <value>test</value>
+        </Parameter>
+    </parameters>
+</DataStore>

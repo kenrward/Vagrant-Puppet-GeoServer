@@ -9,13 +9,14 @@
 
 Vagrant.configure("2") do  |config|
   config.vm.box = "puppetlabs/centos-6.6-32-puppet"
-  config.vm.provision "shell", path: "install-puppet-modules.sh"
+  #config.vm.provision "shell", path: "install-puppet-modules.sh"
   
   config.vm.define "gis" do |gis|
     gis.vm.network "forwarded_port", guest: 80, host: 8000
     gis.vm.network "forwarded_port", guest: 8080, host: 8880
     gis.vm.network "private_network", ip: "192.168.33.10"  
 	gis.vm.hostname = "geoserver.test.server"
+	gis.vm.provision "shell", path: "install-puppet-modules.sh"
 	
 	#gis.vm.provider "virtualbox" do |v|
 	#  v.gui = true
@@ -29,10 +30,18 @@ Vagrant.configure("2") do  |config|
       end
   end
 
-  #config.vm.define "db" do |db|
-  #  db.vm.network "forwarded_port", guest: 3306, host: 3306
-  #  db.vm.network "private_network", ip: "192.168.33.11"
-  #end
+  config.vm.define "db" do |db|
+    db.vm.network "forwarded_port", guest: 3306, host: 3306
+    db.vm.network "private_network", ip: "192.168.33.11"
+    db.vm.provision "shell", path: "install-puppet-modules-db.sh"
+	
+      db.vm.provision "puppet" do |puppet|
+        puppet.manifests_path = 'puppet/manifests'
+        puppet.module_path = 'puppet/modules'
+        puppet.manifest_file = 'db.pp'
+        #puppet.options = '--debug --verbose'
+      end
+  end
   
   
   
