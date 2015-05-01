@@ -14,12 +14,19 @@ class geoserver {
 	  path     => ["/usr/bin", "/usr/sbin"],
       require   => Service['tomcat6'],
 	}
+	exec { 'stop-tomcat':
+	  command => 'sudo service tomcat6 stop',
+	  path     => ["/usr/bin", "/usr/sbin"],
+	}
 	
-	  file { "/usr/share/tomcat6/webapps/geoserver/data/global.xml":
-		owner => 'tomcat',
-		require => Package['tomcat6'],
-		notify => Service['tomcat6'],
-		content => template('geoserver/global.xml.erb')
-	  }
+	
+	file { '/var/lib/tomcat6/webapps/geoserver/data/global.xml':
+     owner => 'tomcat',
+	 group => 'tomcat',
+     before => Exec['stop-tomcat'],
+     notify => Service['tomcat6'],
+     content => template('geoserver/global.xml.erb'),
+  }
+	
 }
 
